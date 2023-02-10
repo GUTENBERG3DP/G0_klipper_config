@@ -46,7 +46,7 @@ def getSavedConfig(configFile):
 # remove old config 
 def removeOldConfig():
     for localFile in os.listdir(DEST_FW_DIR):  
-            if localFile.endswith(".cfg") and localFile not in EXCLUDE_LIST:
+            if (localFile.endswith(".cfg") or localFile.endswith(".conf")) and localFile not in EXCLUDE_LIST:
                 try:
                     logging.info("\tRemove  : " + str(localFile))
                     os.remove(DEST_FW_DIR + "/" + localFile) 
@@ -57,7 +57,7 @@ def removeOldConfig():
 def getConfigSource():
     srcFileList = []
     for srcFile in os.listdir(SRC_FW_DIR):
-        if srcFile.endswith(".cfg") and srcFile not in EXCLUDE_LIST:
+        if (srcFile.endswith(".cfg") or  srcFile.endswith(".conf")) and srcFile not in EXCLUDE_LIST:
             srcFileList.append(srcFile)
 
     configSources = []
@@ -66,8 +66,11 @@ def getConfigSource():
             tmpConf = configparser.ConfigParser(delimiters=(':','='))
             tmpConf.read(SRC_FW_DIR + "/" + srcFile)
             logging.debug("\t" + str(tmpConf.sections()))
-            configSrcObj = ConfigSrc(srcFile,tmpConf)
-            configSources.append(configSrcObj)
+            if len(tmpConf.sections()) ==0:
+                logging.warning(msg)("\tEmpty!")
+            else:
+                configSrcObj = ConfigSrc(srcFile,tmpConf)
+                configSources.append(configSrcObj)
         except Exception as e:
             logging.error("\t" + str(e))
     return configSources
@@ -76,6 +79,8 @@ def getOverrideConfig():
     try:
         config = configparser.ConfigParser(delimiters=(':','='))
         config.read(OVERRIDE_CONFIG)
+        if len(config.sections()) == 0:
+            return None
         return config
     except Exception as e:
         logging.error("\t" + str(e))
