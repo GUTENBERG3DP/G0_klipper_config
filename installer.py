@@ -66,7 +66,7 @@ def getConfigSource():
             tmpConf = configparser.ConfigParser(delimiters=(':','='))
             tmpConf.read(SRC_FW_DIR + "/" + srcFile)
             logging.debug("\t" + str(tmpConf.sections()))
-            if len() ==0:
+            if len(tmpConf) ==0:
                 logging.warning(msg)("\tEmpty!")
             else:
                 configSrcObj = ConfigSrc(srcFile,tmpConf)
