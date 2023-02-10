@@ -1,14 +1,16 @@
 # G0_klipper_config
 
-## 1. 現在の設定をバックアップする
+FW最終更新: 2022-12-12
+ツール最終更新: 2023-02-10
+
+## 初回インストール場合
+
+- 下のコマンドを実行し、開かれた設定ファイルにマシン個別の設定を入力する
 
 <pre>cd ~/Code/G0_klipper_config
-./backup.sh</pre>
-
-- バックアップした後は変更した内容を commit すること
-
-## 2. Git からバックアップした設定を復元
-
-<pre>cd ~/Code/G0_klipper_config
-git pull
 ./install.sh</pre>
+
+## 古い設定から最新バージョンにアップデート場合
+※<code>アップデート機能は2023-01-30以降のfwのみ対応</code>
+<pre>cd ~/Code/G0_klipper_config
+./update.sh</pre>
