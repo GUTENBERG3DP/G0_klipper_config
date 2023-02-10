@@ -57,7 +57,7 @@ def removeOldConfig():
 def getConfigSource():
     srcFileList = []
     for srcFile in os.listdir(SRC_FW_DIR):
-        if srcFile.endswith(".cfg") and srcFile not in EXCLUDE_LIST:
+        if (srcFile.endswith(".cfg") or  srcFile.endswith(".conf")) and srcFile not in EXCLUDE_LIST:
             srcFileList.append(srcFile)
 
     configSources = []
