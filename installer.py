@@ -66,7 +66,7 @@ def getConfigSource():
             tmpConf = configparser.ConfigParser(delimiters=(':','='))
             tmpConf.read(SRC_FW_DIR + "/" + srcFile)
             logging.debug("\t" + str(tmpConf.sections()))
-            if len(tmpConf) ==0:
+            if len(tmpConf.sections()) ==0:
                 logging.warning(msg)("\tEmpty!")
             else:
                 configSrcObj = ConfigSrc(srcFile,tmpConf)
@@ -138,7 +138,7 @@ def main():
     # if the above currentSavedConfig is empty srcSavedConfig will be used
     logging.info("# Loading default saved config...")
     srcSavedConfig = getSavedConfig(SRC_FW_DIR + "/" + "printer.cfg")
-    if len(srcSavedConfig.sections()) == 0:
+    if len(srcSavedConfig) == 0:
         logging.info("\tNo default saved config found.")
     else:
         logging.info("\tloaded " + str(len(srcSavedConfig)) + " lines.")
