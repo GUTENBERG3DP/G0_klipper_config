@@ -19,7 +19,6 @@ class ConfigSrc(object):
     fileName = ""
     src = None
 
-    # The class "constructor" - It's actually an initializer 
     def __init__(self, fileName, src):
         self.fileName = fileName
         self.src = src
@@ -66,11 +65,10 @@ def getConfigSource():
             tmpConf = configparser.ConfigParser(delimiters=(':','='))
             tmpConf.read(SRC_FW_DIR + "/" + srcFile)
             logging.debug("\t" + str(tmpConf.sections()))
-            if len(tmpConf.sections()) ==0:
-                logging.warning(msg)("\tEmpty!")
-            else:
-                configSrcObj = ConfigSrc(srcFile,tmpConf)
-                configSources.append(configSrcObj)
+            #if len(tmpConf.sections()) ==0:
+            #    logging.warning(msg)("\tEmpty!")
+            configSrcObj = ConfigSrc(srcFile,tmpConf)
+            configSources.append(configSrcObj)
         except Exception as e:
             logging.error("\t" + str(e))
     return configSources
